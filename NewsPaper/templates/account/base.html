@@ -1,0 +1,9 @@
+{% extends 'flatpages/default.html' %}
+
+{% block user_greeting %}
+    {% load i18n %}
+{% endblock user_greeting %}
+
+{% block content %}
+    {{ flatpage.content }}
+{% endblock content %}
