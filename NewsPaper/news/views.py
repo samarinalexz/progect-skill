@@ -12,6 +12,13 @@ from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.cache import cache
+import logging
+logger = logging.getLogger(__name__)
+def contact(request):
+    ...
+    logger.general('/path/to/django/general.log')
+    logger.errors('/path/to/django/errors.log')
+    logger.security('/path/to/django/security.log')
 
 
 class NewsList(ListView):

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 from django.core.mail.backends import console
+import logging
+from logging.handlers import RotatingFileHandler
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -195,19 +197,23 @@ LOGGING = {
     "disable_existing_loggers": False,
     "formatters": {
         "verbose": {
-            "format": "{levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "format": "{asctime} {levelname} {message} {pathname} {exc_info}",
             "style": "{",
         },
         "simple": {
-            "format": "{levelname} {message}",
+            "format": "{asctime} {levelname} {message}",
+            "style": "{",
+        },
+        "easy": {
+            "format": "{asctime} {levelname} {message} {pathname}",
+            "style": "{",
+        },
+        "simle_module": {
+            "format": "{asctime} {levelname} {module} {message}",
             "style": "{",
         },
     },
     "filters": {
-        "special": {
-            "()": "project.logging.SpecialFilter",
-            "foo": "bar",
-        },
         "require_debug_true": {
             "()": "django.utils.log.RequireDebugTrue",
         },
@@ -220,22 +226,19 @@ LOGGING = {
             "level": "DEBUG",
             "filters": ["require_debug_true"],
             "class": "logging.StreamHandler",
-            "formatter": "{asctime} {levelname} {message}",
-            "style": "{",
+            "formatter": "simple",
         },
         "console_warning": {
             "level": "WARNING",
             "filters": ["require_debug_true"],
             "class": "logging.StreamHandler",
-            "formatter": "{asctime} {levelname} {message} {pathname}",
-            "style": "{",
+            "formatter": "easy",
         },
         "console_error": {
             "level": "ERROR",
             "filters": ["require_debug_true"],
             "class": "logging.StreamHandler",
-            "formatter": "{asctime} {levelname} {message} {pathname} {exc_info}",
-            "style": "{",
+            "formatter": "verbose",
         },
         "mail_admins": {
             "level": "ERROR",
@@ -246,23 +249,24 @@ LOGGING = {
             "level": "INFO",
             "class": "logging.FileHandler",
             "filters": ["require_debug_false"],
-            "formatter": "{asctime} {levelname} {module} {message}",
+            "format": "{asctime} {levelname} {module} {message}",
             "style": "{",
-            "filename": "/path/to/django/general.log",
+            "filename": "/NewsPaper/django/general.log",
+            'propagate': True,
         },
         "file_errors": {
             "level": "ERROR",
             "class": "logging.FileHandler",
-            "formatter": "{asctime} {levelname} {message} {pathname} {exc_info}",
-            "style": "{",
-            "filename": "/path/to/django/errors.log",
+            "formatter": "verbose",
+            "filename": "NewsPaper/config/errors.log",
+            'propagate': True,
         },
         "file_security": {
             "level": "INFO",
             "class": "logging.FileHandler",
-            "formatter": "{asctime} {levelname} {message} {module}",
-            "style": "{",
-            "filename": "/path/to/django/security.log",
+            "formatter": "simle_module",
+            "filename": "/NewsPaper/django/security.log",
+            'propagate': True,
         },
     },
     "loggers": {
@@ -273,14 +277,13 @@ LOGGING = {
         "django.request": {
             "handlers": ["mail_admins", "file_errors"],
             "level": "ERROR",
-            "formatter": "{asctime} {levelname} {message} {pathname}",
-            "style": "{",
+            "formatter": "easy",
             "propagate": False,
         },
         "django.server": {
             "handlers": ["mail_admins", "file_errors"],
             "level": "INFO",
-            "formatter": "{asctime} {levelname} {message} {pathname}",
+            "formatter": "easy",
             "style": "{",
             "propagate": False,
         },
