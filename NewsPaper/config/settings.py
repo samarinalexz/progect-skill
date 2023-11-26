@@ -252,21 +252,18 @@ LOGGING = {
             "format": "{asctime} {levelname} {module} {message}",
             "style": "{",
             "filename": "NewsPaper/config/general.log",
-            'propagate': True,
         },
         "file_errors": {
             "level": "ERROR",
             "class": "logging.FileHandler",
             "formatter": "verbose",
             "filename": "NewsPaper/config/errors.log",
-            'propagate': True,
         },
         "file_security": {
             "level": "INFO",
             "class": "logging.FileHandler",
             "formatter": "simle_module",
             "filename": "NewsPaper/config/security.log",
-            'propagate': True,
         },
     },
     "loggers": {
@@ -304,3 +301,5 @@ LOGGING = {
         },
     },
 }
+
+
