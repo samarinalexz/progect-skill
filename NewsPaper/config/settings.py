@@ -251,7 +251,7 @@ LOGGING = {
             "filters": ["require_debug_false"],
             "format": "{asctime} {levelname} {module} {message}",
             "style": "{",
-            "filename": "/NewsPaper/config/general.log",
+            "filename": "NewsPaper/config/general.log",
             'propagate': True,
         },
         "file_errors": {
