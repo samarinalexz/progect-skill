@@ -251,7 +251,7 @@ LOGGING = {
             "filters": ["require_debug_false"],
             "format": "{asctime} {levelname} {module} {message}",
             "style": "{",
-            "filename": "/NewsPaper/django/general.log",
+            "filename": "/NewsPaper/config/general.log",
             'propagate': True,
         },
         "file_errors": {
@@ -265,7 +265,7 @@ LOGGING = {
             "level": "INFO",
             "class": "logging.FileHandler",
             "formatter": "simle_module",
-            "filename": "/NewsPaper/django/security.log",
+            "filename": "NewsPaper/config/security.log",
             'propagate': True,
         },
     },
